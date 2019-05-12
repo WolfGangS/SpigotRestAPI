@@ -20,14 +20,14 @@ It mostly allows you to get player info and run commands via a http request. (th
 
 # Command Endpoints
 
-###`/commands/console` `POST`
+### /commands/console `POST`
 Run a command immediately as console 
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
 <br>
 <br>
 <br>
-###`/commands/player/:id` `POST`
+### /commands/player/:id `POST`
 Run a command as player matching the uuid, if the player is not online the command will be queued till they join the server
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
@@ -36,7 +36,7 @@ Run a command as player matching the uuid, if the player is not online the comma
 <br>
 <br>
 <br>
-###`/commands/console/queue/:for` `POST`
+### /commands/console/queue/:for `POST`
 Queue a command to run on the console at a trigger
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
@@ -45,7 +45,7 @@ Queue a command to run on the console at a trigger
 <br>
 <br>
 <br>
-###`/commands/console/queue/:for/:option` `POST`
+### /commands/console/queue/:for/:option `POST`
 Queue a command to run on the console at a trigger with data for that trigger
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
