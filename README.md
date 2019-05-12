@@ -2,10 +2,13 @@
 
 A simple http api for spigot minecraft servers.
 
-The enpoints are as follows
+This plugin currently does not save its command queue between restarts, (this is coming)
 
-Data Endpoints
---
+The plugin is meant to be a simple and easy to maintain as possible, as such it implements very little.
+
+It mostly allows you to get player info and run commands via a http request. (thus allowing it to be used with MOST other plugins)
+
+# Data Endpoints
 
 | endpoint | method | arguments | description |
 | -------- | ------ | --------- | ----------- |
@@ -15,74 +18,41 @@ Data Endpoints
 | /players/:id/enderchest | GET | :id  =  a player uuid | get an online players enderchest inventory |
 
 
-Command Endpoints
---
-<table>
-  <tr>
-    <th>Endpoint</th>
-    <th>Method</th>
-    <th colspan="2">Arguments</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>/commands/console</td>
-    <td>POST</td>
-    <td>body</td>
-    <td>command text (e.g "give player diamond 1")</td>
-    <td>run a command from the console immediatly</td>
-  </tr>
-  <tr>
-    <td>/commands/player/:id</td>
-    <td>POST</td>
-    <td>body</td>
-    <td>command text (e.g "give player diamond 1")</td>
-    <td>run a command as player matching the uuid, if the player is not online the command will be queued till they join the server</td>
-  </tr>
-  <tr>
-    <td rowspan="2">/commands/console/queue/:for</td>
-    <td rowspan="2">POST</td>
-    <td>body</td>
-    <td>the command to run (e.g "give player diamond 1")</td>
-    <td rowspan="2">run a command from the console immediatly</td>
-  </tr>
-  <tr>
-    <td>:for</td>
-    <td>the scenario to wait for</td>
-  </tr>
-  <tr>
-    <td rowspan="3">/commands/console/queue/:for/:option</td>
-    <td rowspan="3">POST</td>
-    <td>body</td>
-    <td>the command to run (e.g "give player diamond 1")</td>
-    <td rowspan="3">run a command from the console immediatly</td>
-  </tr>
-  <tr>
-    <td>:for</td>
-    <td>the scenario to wait for</td>
-  </tr>
-  <tr>
-    <td>:option</td>
-    <td>data for the scenario check</td>
-  </tr>
-  <tr>
-    <td>/commands/console</td>
-    <td>POST</td>
-    <td>body</td>
-    <td>the command to run (e.g "give player diamond 1")</td>
-    <td>run a command from the console immediatly</td>
-  </tr>
-  <tr>
-    <td>/commands/console</td>
-    <td>POST</td>
-    <td>body</td>
-    <td>the command to run (e.g "give player diamond 1")</td>
-    <td>run a command from the console immediatly</td>
-  </tr>
-  <tr>
-    <td>/commands/console</td>
-    <td>POST</td>
-    <td>body</td>
-    <td>the command to run (e.g "give player diamond 1")</td>
-    <td>run a command from the console immediatly</td>
-  </tr>
-</table>
+# Command Endpoints
+
+###`/commands/console` `POST`
+Run a command immediately as console 
+<br>
+`body = command sting ( e.g "give player diamond 1" )`
+<br>
+<br>
+<br>
+###`/commands/player/:id` `POST`
+Run a command as player matching the uuid, if the player is not online the command will be queued till they join the server
+<br>
+`body = command sting ( e.g "give player diamond 1" )`
+<br>
+`:id = player uuid`
+<br>
+<br>
+<br>
+###`/commands/console/queue/:for` `POST`
+Queue a command to run on the console at a trigger
+<br>
+`body = command sting ( e.g "give player diamond 1" )`
+<br>
+`:for = the scenario to run the command at (see below)`
+<br>
+<br>
+<br>
+###`/commands/console/queue/:for/:option` `POST`
+Queue a command to run on the console at a trigger with data for that trigger
+<br>
+`body = command sting ( e.g "give player diamond 1" )`
+<br>
+`:for = the scenario to run the command at (see below)`
+<br>
+`:for = the scenario to run the command at (see below)`
+<br>
+<br>
+<br>
