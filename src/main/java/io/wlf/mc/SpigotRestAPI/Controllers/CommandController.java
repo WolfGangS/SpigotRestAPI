@@ -13,6 +13,6 @@ public class CommandController {
         post("/commands/console/queue/:scenario/:data", (req, res) -> commandService.queueCommand(req.body(), req.params(":scenario"), req.params(":data")), json());
         post("/commands/console/edit/:key", (req, res) -> commandService.editQueuedCommand(req.params(":key"), req.body()), json());
         get("/commands/console/list", (req, res) -> commandService.getCommandQueue(), json());
-        get("/commands/console/cancel/:key", (req, res) -> commandService.cancelQueuedCommand(req.params(":key")), json());
+        delete("/commands/console/cancel/:key", (req, res) -> commandService.cancelQueuedCommand(req.params(":key")), json());
     }
 }

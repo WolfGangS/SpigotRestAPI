@@ -102,7 +102,7 @@ Get a list of all queued commands
 <br>
 `response = a list of command objects`
 <br>
-### /commands/console/cancel/:key `GET`
+### /commands/console/cancel/:key `DELETE`
 Cancel a queued command
 <br>
 `:key = the key of the queued command`
