@@ -1,0 +1,3 @@
+name: SpigotRestAPI
+version: 0.1
+main: io.wlf.mc.SpigotRestAPI.SpigotRestAPI
