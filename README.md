@@ -8,15 +8,44 @@ The plugin is meant to be a simple and easy to maintain as possible, as such it 
 
 It mostly allows you to get player info and run commands via a http request. (thus allowing it to be used with MOST other plugins)
 
+# Response
+
+All responses are formatted like this.
+
+``` js
+{
+    "status": "Okay" / "Fail",
+    "data" : <response object>
+}
+```
+
 # Data Endpoints
 
-| endpoint | method | arguments | description |
-| -------- | ------ | --------- | ----------- |
-| /players | GET | n/a | get a list of online players and their basic info |
-| /players/:id | GET | :id  =  a player uuid | get info for a specific player uuid |
-| /players/:id/inventory | GET | :id  =  a player uuid | get an online players inventory |
-| /players/:id/enderchest | GET | :id  =  a player uuid | get an online players enderchest inventory |
+### /players `GET`
+Get a list of online players and their basic info
+<br>
+`response = array of player objects`
 
+### /players/:id `GET`
+Get info for a specific player uuid
+<br>
+`:id =  a player uuid`
+<br>
+`response = a player object`
+<br>
+### /players/:id/inventory `GET`
+Get an online players inventory
+<br>
+`:id  =  a player uuid`
+<br>
+`response = a player inventory`
+<br>
+### /players/:id/enderchest `GET`
+get an online players enderchest inventory
+<br>
+`:id  =  a player uuid`
+<br>
+`response = a chest inventory`
 
 # Command Endpoints
 
@@ -25,7 +54,7 @@ Run a command immediately as console
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
 <br>
-<br>
+`response = empty`
 <br>
 ### /commands/player/:id `POST`
 Run a command as player matching the uuid, if the player is not online the command will be queued till they join the server
@@ -34,25 +63,47 @@ Run a command as player matching the uuid, if the player is not online the comma
 <br>
 `:id = player uuid`
 <br>
+`response = empty or a key string for the queued command`
 <br>
-<br>
-### /commands/console/queue/:for `POST`
+### /commands/console/queue/:scenario `POST`
 Queue a command to run on the console at a trigger
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
 <br>
-`:for = the scenario to run the command at (see below)`
+`:scenario = the scenario to run the command at (see below)`
 <br>
+`response = a key string for the queued command`
 <br>
-<br>
-### /commands/console/queue/:for/:option `POST`
+### /commands/console/queue/:scenario/:data `POST`
 Queue a command to run on the console at a trigger with data for that trigger
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
 <br>
-`:for = the scenario to run the command at (see below)`
+`:scenario = the scenario to run the command at (see below)`
 <br>
-`:for = the scenario to run the command at (see below)`
+`:data = the scenario to run the command at (see below)`
 <br>
+`response = a key string for the queued command`
 <br>
+### /commands/console/edit/:key `POST`
+Edit a queued command
 <br>
+`body = command sting ( e.g "give player diamond 1" )`
+<br>
+`:key = the key of the queued command`
+<br>
+`response = edited command object`
+<br>
+### /commands/console/list `GET`
+Get a list of all queued commands
+<br>
+`response = a list of command objects`
+<br>
+### /commands/console/cancel/:key `GET`
+Cancel a queued command
+<br>
+`:key = the key of the queued command`
+<br>
+`response = empty`
+<br>
+
