@@ -11,6 +11,17 @@ It mostly allows you to get player info and run commands via a http request. (th
 There is a very basic token based authentication system, 
 #### BUT THE PLUGIN IS NOT INTENDED TO BE SECURE, IT SHOULD REALLY BE RUN WITHOUT BEING EXPOSED TO THE INTERNET DIRECTLY 
 
+You can load the postman file for examples
+
+# Config
+
+```yaml
+port: 8765                 # the port the http server should listen on
+authentication: false      # whether to use the simple token authentication system
+tokens:
+  24f8ea23-5882-6a6d-8217-a21e812bf9cd: "name"    # the key on the left should be passed as a header named "token" the value on the right does not matter but should be useful for labeling them
+```
+
 # Response
 
 All responses are formatted like this.
