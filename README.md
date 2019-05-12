@@ -50,11 +50,19 @@ Command Endpoints
     <td>the scenario to wait for</td>
   </tr>
   <tr>
-    <td>/commands/console</td>
-    <td>POST</td>
+    <td rowspan="3">/commands/console/queue/:for/:option</td>
+    <td rowspan="3">POST</td>
     <td>body</td>
     <td>the command to run (e.g "give player diamond 1")</td>
-    <td>run a command from the console immediatly</td>
+    <td rowspan="3">run a command from the console immediatly</td>
+  </tr>
+  <tr>
+    <td>:for</td>
+    <td>the scenario to wait for</td>
+  </tr>
+  <tr>
+    <td>:option</td>
+    <td>data for the scenario check</td>
   </tr>
   <tr>
     <td>/commands/console</td>
