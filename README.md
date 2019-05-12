@@ -6,12 +6,20 @@ This plugin currently does not save its command queue between restarts, (this is
 
 The plugin is meant to be a simple and easy to maintain as possible, as such it implements very little.
 
+I hope for it to provide the bare minimum that is needed to implement most kinds of systems
+
 It mostly allows you to get player info and run commands via a http request. (thus allowing it to be used with MOST other plugins)
 
 There is a very basic token based authentication system, 
 #### BUT THE PLUGIN IS NOT INTENDED TO BE SECURE, IT SHOULD REALLY BE RUN WITHOUT BEING EXPOSED TO THE INTERNET DIRECTLY 
 
 You can load the postman file for examples
+
+# Planned Features
+ - Saving the queue between restarts
+ - Offline players
+ - more scenarios for commands to run on
+ - returning or storing results of commands for later retrieval
 
 # Config
 
