@@ -68,7 +68,7 @@ Run a command as player matching the uuid, if the player is not online the comma
 <br>
 `response = empty or a key string for the queued command`
 <br>
-### /commands/console/queue/:scenario `POST`
+### /commands/console/queue/:scenario `POST` NOT CURRENTLY USEFUL
 Queue a command to run on the console at a trigger
 <br>
 `body = command sting ( e.g "give player diamond 1" )`
@@ -110,3 +110,10 @@ Cancel a queued command
 `response = empty`
 <br>
 
+# Scenarios
+
+`player_join` Requires data of a player uuid
+
+`player_death`  Requires data of a player uuid
+
+`player_respawn`  Requires data of a player uuid
