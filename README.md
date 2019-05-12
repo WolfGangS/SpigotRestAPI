@@ -9,7 +9,7 @@ The plugin is meant to be a simple and easy to maintain as possible, as such it 
 It mostly allows you to get player info and run commands via a http request. (thus allowing it to be used with MOST other plugins)
 
 There is a very basic token based authentication system, 
-#####BUT THE PLUGIN IS NOT INTENDED TO BE SECURE, IT SHOULD REALLY BE RUN WITHOUT BEING EXPOSED TO THE INTERNET DIRECTLY 
+#### BUT THE PLUGIN IS NOT INTENDED TO BE SECURE, IT SHOULD REALLY BE RUN WITHOUT BEING EXPOSED TO THE INTERNET DIRECTLY 
 
 # Response
 
