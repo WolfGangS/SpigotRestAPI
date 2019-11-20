@@ -1,7 +1,6 @@
 package io.wlf.mc.SpigotRestAPI.Listeners;
 
 import io.wlf.mc.SpigotRestAPI.Models.wCondition;
-import io.wlf.mc.SpigotRestAPI.Services.CommandQueueService;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;

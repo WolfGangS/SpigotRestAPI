@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "6ab0ec8f-4f4e-4683-93e3-97bc3516e4e0",
+		"name": "SpigotRestAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Player",
+			"item": [
+				{
+					"name": "Players : List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8765/players",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players : Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8765/players/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"players",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players : Inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8765/players/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa/inventory",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"players",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players : Enderchest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8765/players/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa/enderchest",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"players",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+								"enderchest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Command",
+			"item": [
+				{
+					"name": "Command : Run",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "op WolfGangS"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/console",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"console"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				},
+				{
+					"name": "Command : Run As Player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "me has run a command"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/player/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"player",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				},
+				{
+					"name": "Command : Queue On player Join",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "deop WolfGangS"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/console/queue/player_join/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"console",
+								"queue",
+								"player_join",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				},
+				{
+					"name": "Command : Queue On Player Respawn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "give WolfGangS diamond 1"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/console/queue/player_respawn/19b8d0ce-4226-4f8d-9032-f5ba788bb8aa",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"console",
+								"queue",
+								"player_respawn",
+								"19b8d0ce-4226-4f8d-9032-f5ba788bb8aa"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				},
+				{
+					"name": "Command : Get Queue",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "op WolfGangS"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/console/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"console",
+								"list"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				},
+				{
+					"name": "Command : Delete Queued Command",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "op WolfGangS"
+						},
+						"url": {
+							"raw": "localhost:8765/commands/console/cancel/24f8ea23-5882-6a6d-8217-a21e812bf9cd",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"commands",
+								"console",
+								"cancel",
+								"24f8ea23-5882-6a6d-8217-a21e812bf9cd"
+							]
+						},
+						"description": "Command : Run"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -4,7 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 import io.wlf.mc.SpigotRestAPI.Controllers.CommandController;
 import io.wlf.mc.SpigotRestAPI.Controllers.PlayerController;
 import io.wlf.mc.SpigotRestAPI.Listeners.PlayerListener;
-import io.wlf.mc.SpigotRestAPI.Services.CommandQueueService;
 import io.wlf.mc.SpigotRestAPI.Services.CommandService;
 import io.wlf.mc.SpigotRestAPI.Services.PlayerService;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -20,8 +19,6 @@ public class SpigotRestAPI extends JavaPlugin {
 
     private PlayerController playerController;
     private CommandController commandController;
-
-    private CommandQueueService queueService;
 
     private PlayerListener playerListener;
 
@@ -77,7 +74,7 @@ public class SpigotRestAPI extends JavaPlugin {
         this.config = this.getConfig();
         this.config.addDefault("port", 8765);
         this.config.addDefault("authentication", false);
-        this.config.set("tokens.example-token-2","remove me 2");
+        //this.config.set("tokens.example-token-2","remove me 2");
         this.saveConfig();
     }
 
@@ -90,13 +87,12 @@ public class SpigotRestAPI extends JavaPlugin {
     }
 
     private void initServices() {
-        this.queueService = new CommandQueueService(this);
     }
 
     private void initControllers() {
         playerController = new PlayerController(new PlayerService(this));
 
-        commandController = new CommandController(new CommandService(this, this.queueService));
+        commandController = new CommandController(new CommandService(this));
 
     }
 
