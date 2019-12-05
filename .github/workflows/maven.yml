@@ -1,6 +1,10 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
@@ -15,12 +19,28 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Copy Artifact
-      run: cp /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI-*-SNAPSHOT-jar-with-dependencies.jar /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI.SNAPSHOT.jar
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        # Artifact name
-        name: SpigotRestAPI.SNAPSHOT.jar
-        # Directory containing files to upload
-        path: /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI.SNAPSHOT.jar
+        name: target
+        path: /home/runner/work/SpigotRestAPI/SpigotRestAPI/target
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./my-artifact.zip
+        asset_name: my-artifact.zip
+        asset_content_type: application/zip
