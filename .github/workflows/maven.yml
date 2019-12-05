@@ -15,12 +15,12 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-#    - name: Copy Artifact
-#      run: 
+    - name: Copy Artifact
+      run: cp /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI-*-SNAPSHOT-jar-with-dependencies.jar /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI.SNAPSHOT.jar
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: snapshot.jar
+        name: SpigotRestAPI.SNAPSHOT.jar
         # Directory containing files to upload
-        path: /home/runner/work/SpigotRestAPI/SpigotRestAPI/target
+        path: /home/runner/work/SpigotRestAPI/SpigotRestAPI/target/SpigotRestAPI.SNAPSHOT.jar
