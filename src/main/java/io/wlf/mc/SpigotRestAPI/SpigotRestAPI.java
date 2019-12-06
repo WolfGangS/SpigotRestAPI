@@ -97,7 +97,7 @@ public class SpigotRestAPI extends JavaPlugin {
     }
 
     private void initListeners() {
-        playerListener = new PlayerListener(this, this.queueService);
+        playerListener = new PlayerListener(this);
     }
 
     private boolean authenticateToken(String token) {
