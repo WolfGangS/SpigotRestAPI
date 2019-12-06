@@ -87,47 +87,6 @@ Run a command as player matching the uuid, if the player is not online the comma
 <br>
 `response = empty or a key string for the queued command`
 <br>
-### /commands/console/queue/:scenario `POST` NOT CURRENTLY USEFUL
-Queue a command to run on the console at a trigger
-<br>
-`body = command sting ( e.g "give player diamond 1" )`
-<br>
-`:scenario = the scenario to run the command at (see below)`
-<br>
-`response = a key string for the queued command`
-<br>
-### /commands/console/queue/:scenario/:data `POST`
-Queue a command to run on the console at a trigger with data for that trigger
-<br>
-`body = command sting ( e.g "give player diamond 1" )`
-<br>
-`:scenario = the scenario to run the command at (see below)`
-<br>
-`:data = the scenario to run the command at (see below)`
-<br>
-`response = a key string for the queued command`
-<br>
-### /commands/console/edit/:key `POST`
-Edit a queued command
-<br>
-`body = command sting ( e.g "give player diamond 1" )`
-<br>
-`:key = the key of the queued command`
-<br>
-`response = edited command object`
-<br>
-### /commands/console/list `GET`
-Get a list of all queued commands
-<br>
-`response = a list of command objects`
-<br>
-### /commands/console/cancel/:key `DELETE`
-Cancel a queued command
-<br>
-`:key = the key of the queued command`
-<br>
-`response = empty`
-<br>
 
 # Scenarios
 
