@@ -1,6 +1,10 @@
 name: Test Build
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
 
 jobs:
   test:
