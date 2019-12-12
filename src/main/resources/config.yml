@@ -1,14 +1,17 @@
-port: 8765
-authentication: false
+port: 8765                      # the port the http server should listen on
+authentication: false           # whether to use the simple token authentication system
 tokens:
-  example-token: "remove me"
+  example-token: "remove me"    # the key on the left should be passed as a header named "token" the value on the right does not matter but should be useful for labeling them
 httpEvents:
-  secure: true
-  domain: "example.test"
-  port: 8000
-  endpoints:
+  enabled: false                # Enable / Disable the event requests
+  secure: true                  # should the web request use http or https (default)
+  domain: localhost             # the domain the request should goto
+  port: 8000                    # the port
+  endpoints:                    # this lists the endpoints you want the events to use.
     server:
-      online: "/server/online"
+      online: /server/online
     player:
-      online: "/player/join"
-      offline: "/player/leave"
+      online: /player/join
+      offline: /player/leave
+#      death: /player/death      # these are disabled by default
+#      spawn: /player/spawn      # uncomment to enabled

@@ -74,7 +74,9 @@ public class SpigotRestAPI extends JavaPlugin {
         initServices();
         initControllers();
         initListeners();
-        this.httpEventService.fire(HttpEventType.server, HttpEvent.online, null);
+        if(this.config.getBoolean("httpEvents.enabled", false)) {
+            this.httpEventService.fire(HttpEventType.server, HttpEvent.online, null);
+        }
     }
 
     private void setupConfig() {
@@ -94,13 +96,18 @@ public class SpigotRestAPI extends JavaPlugin {
     }
 
     private void initServices() {
-        this.httpEventService = new HttpEventService(
-                this,
-                this.config.getBoolean("httpEvents.secure", false),
-                this.config.getString("httpEvents.domain", ""),
-                this.config.getInt("httpsEvents.port", 8000),
-                this.config.getConfigurationSection("httpEvents.endpoints")
-        );
+        if(this.config.getBoolean("httpEvents.enabled", false)) {
+            getLogger().info("Setting up httpEvents");
+            this.httpEventService = new HttpEventService(
+                    this,
+                    this.config.getBoolean("httpEvents.secure", false),
+                    this.config.getString("httpEvents.domain", ""),
+                    this.config.getInt("httpsEvents.port", 8000),
+                    this.config.getConfigurationSection("httpEvents.endpoints")
+            );
+        } else {
+            getLogger().info("httpEvents Disabled");
+        }
     }
 
     private void initControllers() {
@@ -111,7 +118,9 @@ public class SpigotRestAPI extends JavaPlugin {
     }
 
     private void initListeners() {
-        this.playerListener = new PlayerListener(this, this.httpEventService);
+        if(this.config.getBoolean("httpEvents.enabled", false)) {
+            this.playerListener = new PlayerListener(this, this.httpEventService);
+        }
     }
 
     private boolean authenticateToken(String token) {

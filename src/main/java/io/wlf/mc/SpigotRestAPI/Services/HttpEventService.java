@@ -71,8 +71,8 @@ public class HttpEventService {
             }
 
             public void completed(final Content content) {
-                System.out.println("Request completed: " + request);
-                System.out.println(content.asString());
+                //System.out.println("Request completed: " + request);
+                //System.out.println(content.asString());
             }
 
             public void cancelled() {
