@@ -5,7 +5,7 @@
 
     <groupId>io.wlf.mc.</groupId>
     <artifactId>SpigotRestAPI</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
