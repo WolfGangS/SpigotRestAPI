@@ -16,9 +16,7 @@ There is a very basic token based authentication system,
 You can load the postman file for examples
 
 # Planned Features
- - Saving the queue between restarts
  - Offline players
- - more scenarios for commands to run on
  - returning or storing results of commands for later retrieval
 
 # Config
@@ -28,6 +26,19 @@ port: 8765                 # the port the http server should listen on
 authentication: false      # whether to use the simple token authentication system
 tokens:
   24f8ea23-5882-6a6d-8217-a21e812bf9cd: "name"    # the key on the left should be passed as a header named "token" the value on the right does not matter but should be useful for labeling them
+httpEvents:
+  enabled: false           # Enable / Disable the event requests
+  secure: true             # should the web request use http or https (default) 
+  domain: localhost        # the domain the request should goto
+  port: 8000               # the port
+  endpoints:               # this lists the endpoints you want the events to use.
+    server:
+      online: /server/online
+    player:
+      online: /player/join
+      offline: /player/leave
+#      death: /player/death   # these are disabled by default
+#      spawn: /player/spawn   # uncomment to enabled
 ```
 
 # Response
@@ -88,10 +99,16 @@ Run a command as player matching the uuid, if the player is not online the comma
 `response = empty or a key string for the queued command`
 <br>
 
-# Scenarios
+# Http Events
 
-`player_join` Requires data of a player uuid
+The plugin supports a simple event system that will fire a http request to a given domain and path on certain events.
 
-`player_death`  Requires data of a player uuid
+### Events
 
-`player_respawn`  Requires data of a player uuid
+ - server
+    - online
+ - player
+    - online (join)
+    - offline (leave)
+    - death
+    - respawn
