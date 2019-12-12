@@ -1,21 +1,25 @@
 package io.wlf.mc.SpigotRestAPI.Listeners;
 
+import io.wlf.mc.SpigotRestAPI.Models.HttpEvent;
+import io.wlf.mc.SpigotRestAPI.Models.HttpEventType;
 import io.wlf.mc.SpigotRestAPI.Models.wCondition;
-import io.wlf.mc.SpigotRestAPI.Services.CommandQueueService;
+import io.wlf.mc.SpigotRestAPI.Models.wPlayer;
+import io.wlf.mc.SpigotRestAPI.Services.HttpEventService;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerListener implements Listener {
     private JavaPlugin plugin;
-    private CommandQueueService queueService;
+    private HttpEventService httpEventService;
 
-    public PlayerListener(JavaPlugin plugin, CommandQueueService queueService) {
+    public PlayerListener(JavaPlugin plugin, HttpEventService httpEventService) {
         this.plugin = plugin;
-        this.queueService = queueService;
+        this.httpEventService = httpEventService;
 
         this.registerEvents();
     }
@@ -25,24 +29,22 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        this.httpEventService.fire(HttpEventType.player, HttpEvent.offline, new wPlayer(event.getPlayer()));
+    }
+
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        this.queueService.handleEvent(wCondition.PLAYER_JOIN,event.getPlayer().getUniqueId().toString());
+        this.httpEventService.fire(HttpEventType.player, HttpEvent.online, new wPlayer(event.getPlayer()));
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event){
-        this.queueService.handleEvent(wCondition.PLAYER_DEATH,event.getEntity().getUniqueId().toString());
+        this.httpEventService.fire(HttpEventType.player, HttpEvent.death, new wPlayer(event.getEntity()));
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
-        String playerID = event.getPlayer().getUniqueId().toString();
-        this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(
-                this.plugin,
-                () -> {
-                    this.queueService.handleEvent(wCondition.PLAYER_RESPAWN,playerID);
-                },
-                20L
-        );
+        this.httpEventService.fire(HttpEventType.player, HttpEvent.spawn, new wPlayer(event.getPlayer()));
     }
 }
