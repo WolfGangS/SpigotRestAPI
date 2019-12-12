@@ -1,0 +1,35 @@
+version: "2.3"
+
+networks:
+    test:
+
+volumes:
+    world:
+    world_nether:
+    world_the_end:
+
+services:
+    paper:
+        build: .
+        volumes:
+            - world:/opt/minecraft/world
+            - world_nether:/opt/minecraft/world_nether
+            - world_the_end:/opt/minecraft/world_the_end
+            - ./plugins:/opt/minecraft/plugins
+        ports:
+            - 25565:25565
+            - 8765:8765
+        networks:
+            - test
+    webapp:
+        working_dir: /app
+        entrypoint: php -S 0.0.0.0:8000 test.php
+        image: php:7.4
+        volumes:
+            - ./web:/app
+        networks:
+            - test
+        ports:
+            - 8000:8000
+
+

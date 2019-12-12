@@ -2,11 +2,13 @@ port: 8765
 authentication: false
 tokens:
   example-token: "remove me"
-callbackUrl: "https://example.test/"
-certificatePath: null
-callbackEndpoints:
-  server:
-    online: "server/online"
-  player:
-    join: "player/join/{uuid}"
-    leave: "player/leave/{uuid}"
+httpEvents:
+  secure: true
+  domain: "example.test"
+  port: 8000
+  endpoints:
+    server:
+      online: "/server/online"
+    player:
+      online: "/player/join"
+      offline: "/player/leave"

@@ -1,10 +1,14 @@
 package io.wlf.mc.SpigotRestAPI;
 
-import com.sun.net.httpserver.HttpServer;
+//import com.sun.net.httpserver.HttpServer;
+
 import io.wlf.mc.SpigotRestAPI.Controllers.CommandController;
 import io.wlf.mc.SpigotRestAPI.Controllers.PlayerController;
 import io.wlf.mc.SpigotRestAPI.Listeners.PlayerListener;
+import io.wlf.mc.SpigotRestAPI.Models.HttpEvent;
+import io.wlf.mc.SpigotRestAPI.Models.HttpEventType;
 import io.wlf.mc.SpigotRestAPI.Services.CommandService;
+import io.wlf.mc.SpigotRestAPI.Services.HttpEventService;
 import io.wlf.mc.SpigotRestAPI.Services.PlayerService;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,12 +19,14 @@ import static spark.Spark.*;
 
 public class SpigotRestAPI extends JavaPlugin {
 
-    private HttpServer httpServer;
+    //private HttpServer httpServer;
 
     private PlayerController playerController;
     private CommandController commandController;
 
     private PlayerListener playerListener;
+
+    private HttpEventService httpEventService;
 
     private FileConfiguration config;
 
@@ -68,6 +74,7 @@ public class SpigotRestAPI extends JavaPlugin {
         initServices();
         initControllers();
         initListeners();
+        this.httpEventService.fire(HttpEventType.server, HttpEvent.online, null);
     }
 
     private void setupConfig() {
@@ -87,21 +94,28 @@ public class SpigotRestAPI extends JavaPlugin {
     }
 
     private void initServices() {
+        this.httpEventService = new HttpEventService(
+                this,
+                this.config.getBoolean("httpEvents.secure", false),
+                this.config.getString("httpEvents.domain", ""),
+                this.config.getInt("httpsEvents.port", 8000),
+                this.config.getConfigurationSection("httpEvents.endpoints")
+        );
     }
 
     private void initControllers() {
-        playerController = new PlayerController(new PlayerService(this));
+        this.playerController = new PlayerController(new PlayerService(this));
 
-        commandController = new CommandController(new CommandService(this));
+        this.commandController = new CommandController(new CommandService(this));
 
     }
 
     private void initListeners() {
-        playerListener = new PlayerListener(this);
+        this.playerListener = new PlayerListener(this, this.httpEventService);
     }
 
     private boolean authenticateToken(String token) {
-        if(token != null) {
+        if (token != null) {
 
             if (token.equals("example-token")) {
                 return false;

@@ -17,7 +17,7 @@ public class CommandExecutionService {
 
     public void consoleExecute(String command) {
         command = this.subCommandString(command);
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), command);
+        plugin.getServer().dispatchCommand(this.plugin.getServer().getConsoleSender(), command);
     }
 
     public void playerExecute(String command, String id) {
